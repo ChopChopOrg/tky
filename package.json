@@ -13,7 +13,7 @@
     "build": "tsdx build",
     "test": "tsdx test",
     "commit": "git-cz",
-    "release": "standard-version"
+    "release": "yarn build && standard-version && git push && yarn publish"
   },
   "peerDependencies": {
     "ky": "^0.17.0"
