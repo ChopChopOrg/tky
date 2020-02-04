@@ -21,6 +21,12 @@
   "dependencies": {
     "utility-types": "^3.10.0"
   },
+  "license": "MIT",
+  "bugs": "https://github.com/ChopChopOrg/tky/issues",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ChopChopOrg/tky.git"
+  },
   "husky": {
     "hooks": {
       "pre-commit": "pretty-quick --staged",
