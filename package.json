@@ -1,0 +1,55 @@
+{
+  "name": "tky",
+  "version": "0.1.0",
+  "main": "dist/index.js",
+  "umd:main": "dist/tky.umd.production.js",
+  "module": "dist/tky.es.production.js",
+  "typings": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "start": "tsdx watch",
+    "build": "tsdx build",
+    "test": "tsdx test",
+    "commit": "git-cz",
+    "release": "standard-version"
+  },
+  "peerDependencies": {
+    "ky": "^0.17.0"
+  },
+  "dependencies": {
+    "utility-types": "^3.10.0"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "pretty-quick --staged",
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
+    }
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
+  },
+  "prettier": {
+    "printWidth": 80,
+    "semi": true,
+    "trailingComma": "es5"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^8.3.5",
+    "@commitlint/config-conventional": "^8.3.4",
+    "@types/jest": "^25.1.1",
+    "cz-conventional-changelog": "3.1.0",
+    "husky": "^4.2.1",
+    "ky": "^0.17.0",
+    "prettier": "^1.19.1",
+    "pretty-quick": "^2.0.1",
+    "standard-version": "^7.1.0",
+    "ts-snippet": "^4.2.0",
+    "tsdx": "^0.12.3",
+    "tslib": "^1.10.0",
+    "typescript": "^3.7.5"
+  }
+}
