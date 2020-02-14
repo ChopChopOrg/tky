@@ -37,6 +37,19 @@ const breeds = await dogsApi
 npm install tky ky
 ```
 
+## Alternatives
+
+**But what if I don't trust my backend?**
+
+In this scenario, you should definitely not use tky! \
+Decode the data you receive. Few recommendations:
+
+- [io-ts](https://github.com/gcanti/io-ts)
+- [ts.data.json](https://github.com/joanllenas/ts.data.json)
+- [runtypes](https://github.com/pelotom/runtypes)
+
+You might also be interested in [typescript-is](https://github.com/woutervh-/typescript-is)
+
 ## API
 
 ## 🙌 Contributing
