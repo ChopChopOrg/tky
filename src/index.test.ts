@@ -224,10 +224,9 @@ describe("types - tky", () => {
   test("POST with body", () => {
     expecter(
       (snippet) => /* ts */ `
-                import { tky, ClearMethods, AddEndpoint } from './src';
+                import { tky, AddEndpoint } from './src';
 
-                type TestPostApi = ClearMethods &
-                AddEndpoint<
+                type TestPostApi = AddEndpoint<
                     'post',
                     'user/:id',
                     { id: number },

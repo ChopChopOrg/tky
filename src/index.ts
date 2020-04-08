@@ -72,15 +72,6 @@ export type LimitedKyOptions<
   O extends { searchParams?: SearchParams; json?: Json }
 > = (Omit<Options, "searchParams" | "json"> & O) | undefined;
 
-/**
- * Removes all methods from instance created with `createKy` method.
- *
- * Ensures that we are not able to call any endpoints that are not
- * explicitly defined.
- */
-export interface ClearMethods  // eslint-disable-next-line @typescript-eslint/no-use-before-define
-  extends Omit<ReturnType<typeof tky>, RequestMethod> {}
-
 export interface TypedResponsePromise<T>
   extends Omit<ResponsePromise, "json" | "then"> {
   json(): Promise<T>;
@@ -103,12 +94,8 @@ export interface TypedResponsePromise<T>
 /**
  * Adds endpoint to and object created by `createKy`..
  *
- * Combined with `ClearMethods` generates types for all API endpoints,
- * providing us with hints of names of endpoints, and attaching correct types
- * of responses to each endpoint.
- *
  * @example
- * type MyApi = ClearMethods &
+ * type MyApi =
  *     AddEndpoint<'get', 'users', {}, User[]> &
  *     AddEndpoint<'get', 'users/:id', { id: number }, User>;
  *
