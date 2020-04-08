@@ -143,7 +143,7 @@ export const replaceEndpointParams = (
   endpoint: string,
   params: Record<string, string | number>
 ): string => {
-  return endpoint.replace(/:\w+/g, v =>
+  return endpoint.replace(/:\w+/g, (v) =>
     params[v.slice(1)] ? params[v.slice(1)].toString() : v
   );
 };
@@ -155,10 +155,8 @@ export interface EndpointSpec {
   result?: any;
 }
 
-export type EndpointsSpec = Record<
-  string,
-  { [P in RequestMethod]?: EndpointSpec }
->;
+export interface EndpointsSpec
+  extends Record<string, { [P in RequestMethod]?: EndpointSpec }> {}
 
 export type TypedKyInstance<
   EndpointsDict extends EndpointsSpec
@@ -282,7 +280,7 @@ export const tky = <T extends EndpointsSpec>(
   const post = (
     endpoint: string,
     endpointParams?: Record<string, string | number>,
-    options?: Options | undefined
+    options?: Options
   ) => {
     return callKyMethod("post", endpoint, endpointParams, options);
   };
@@ -290,7 +288,7 @@ export const tky = <T extends EndpointsSpec>(
   const put = (
     endpoint: string,
     endpointParams?: Record<string, string | number>,
-    options?: Options | undefined
+    options?: Options
   ) => {
     return callKyMethod("put", endpoint, endpointParams, options);
   };
@@ -299,7 +297,7 @@ export const tky = <T extends EndpointsSpec>(
   const deleteMethod = (
     endpoint: string,
     endpointParams?: Record<string, string | number>,
-    options?: Options | undefined
+    options?: Options
   ) => {
     return callKyMethod("delete", endpoint, endpointParams, options);
   };
@@ -307,7 +305,7 @@ export const tky = <T extends EndpointsSpec>(
   const patch = (
     endpoint: string,
     endpointParams?: Record<string, string | number>,
-    options?: Options | undefined
+    options?: Options
   ) => {
     return callKyMethod("patch", endpoint, endpointParams, options);
   };
