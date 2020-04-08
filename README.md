@@ -28,7 +28,7 @@ const dogsApi = tky<{
 const breeds = await dogsApi
   .get("dogs", {}, { searchParams: { limit: 20 } })
   .json()
-  .then(json => json.map(dog => dog.breed));
+  .then((json) => json.map((dog) => dog.breed));
 ```
 
 ## 🔌 Installation
@@ -41,8 +41,14 @@ npm install tky ky
 
 **But what if I don't trust my backend?**
 
-In this scenario, you should definitely not use tky! \
+In this scenario, you should definitely not use tky!
 Decode the data you receive. Few recommendations:
+
+### API clients
+
+- [fetcher-ts](https://github.com/YBogomolov/fetcher-ts)
+
+### Decoding
 
 - [io-ts](https://github.com/gcanti/io-ts)
 - [ts.data.json](https://github.com/joanllenas/ts.data.json)
@@ -50,13 +56,93 @@ Decode the data you receive. Few recommendations:
 
 You might also be interested in [typescript-is](https://github.com/woutervh-/typescript-is)
 
+## Examples
+
+You can find examples in [./example.ts](./example.ts) and [tests](./src/index.test.ts).
+
 ## API
+
+### tky
+
+`tky` constructor receives `EndpointsSpec` in generic parameter.
+It is used for inference of endpoint names, arguments and return types.
+
+#### example
+
+```ts
+const dogsApi = tky<{
+  dogs: {
+    get: {
+      searchParams: {
+        limit: number;
+      };
+      result: Dog[];
+    };
+    post: {
+      json: Dog;
+      result: {
+        id: number;
+      };
+    };
+  };
+}>({ prefixUrl: "https://example.com/dogs" });
+```
+
+#### signature
+
+```ts
+const tky = <T extends EndpointsSpec>(
+  defaultOptions: ky.Options,
+  create: (options: ky.Options) => KyInstance = ky.create
+): TypedKyInstance<T>
+```
+
+### TypedKyInstance
+
+#### methods
+
+The value returned from `tky` has methods for `GET`, `POST`, `PUT`, `PATCH` and `DELETE` HTTP methods with following signature.
+
+```ts
+type Method = (
+  endpoint: string,
+  endpointParams?: Record<string, string | number>,
+  options?: ky.Options
+) => ResponsePromise;
+```
+
+Methods which are not defined in `EndpointsSpec` generic parameter are
+hidden on type level.
+
+#### kyInstance
+
+We include the reference of _ky_ instance the client was created with.
+
+```ts
+interface TypedKyInstance {
+  kyInstance: typeof ky;
+}
+```
 
 ## 🙌 Contributing
 
-This project was bootstrapped with [TSDX](https://github.com/jaredpalmer/tsdx).
+### Conventional Changelog
 
-### Local Development
+Commits are linted with `commitlint`.
+
+#### `npm run commit` or `yarn commit`
+
+Launches [git-cz](https://github.com/commitizen/cz-cli), a CLI wizard.
+You'll be prompted to fill in required fields.
+
+#### `npm run release` or `yarn release`
+
+Bundles the package, creates a new version with `standard version`, pushes to
+GitHub and publishes to NPM.
+
+### Development
+
+This project was bootstrapped with [TSDX](https://github.com/jaredpalmer/tsdx).
 
 Below is a list of commands you will probably find useful.
 
