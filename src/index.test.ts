@@ -51,7 +51,7 @@ describe("types - tky", () => {
 
   test("constructor infers types", () => {
     const expectSnippet = expecter(
-      snippet => /* ts */ `
+      (snippet) => /* ts */ `
                 import { tky } from './src';
 
                 type Dog = {
@@ -135,7 +135,7 @@ describe("types - tky", () => {
       }
     )
       .json()
-      .then(res => {
+      .then((res) => {
         return "data" in res
           ? { type: "success", token: res.data.token }
           : { type: "error", message: res.error };
@@ -223,7 +223,7 @@ describe("types - tky", () => {
 
   test("POST with body", () => {
     expecter(
-      snippet => /* ts */ `
+      (snippet) => /* ts */ `
                 import { tky, ClearMethods, AddEndpoint } from './src';
 
                 type TestPostApi = ClearMethods &
