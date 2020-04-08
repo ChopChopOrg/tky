@@ -114,7 +114,7 @@ type Method = (
 Methods which are not defined in `EndpointsSpec` generic parameter are
 hidden on type level.
 
-#### kyInstance
+#### `kyInstance`
 
 We include the reference of _ky_ instance the client was created with.
 
@@ -123,6 +123,10 @@ interface TypedKyInstance {
   kyInstance: typeof ky;
 }
 ```
+
+#### `ky.Options`
+
+See https://github.com/sindresorhus/ky#options.
 
 ## 🙌 Contributing
 
